@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sa-frontend
+  labels:
+    app: sa-frontend
+spec:
+  containers:
+  - name: sa-frontend
+    image: rinormaloku/sentiment-analysis-frontend
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+      - containerPort: 80

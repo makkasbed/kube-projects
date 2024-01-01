@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sa-frontend
+spec:
+  selector:
+    matchLabels:
+      app: sa-frontend
+  replicas: 2
+  miniReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: sa-frontend
+    spec:
+      containers:
+      - name: sa-frontend
+        image: rinormaloku/sentiment-analysis-frontend
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
